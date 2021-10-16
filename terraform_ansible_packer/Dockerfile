@@ -28,7 +28,8 @@ RUN apt-get update \
     && rm -rf downloads \
     && python3 -m pip install ansible ansible-lint
 
-RUN apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN apt-get clean \
+    && apt-get autoremove -y \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 CMD    ["/bin/bash"]
