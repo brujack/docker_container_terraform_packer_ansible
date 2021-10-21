@@ -20,7 +20,7 @@ RUN apt-get update \
     && apt-get install -y software-properties-common \
     && apt-get update \
     && add-apt-repository ppa:git-core/ppa -y \
-    && apt-get install -y curl git python3 python3-pip python3-boto unzip wget \
+    && apt-get install -y apt-utils curl git jq make python3 python3-pip python3-boto tar unzip wget \
     && apt-get dist-upgrade -y \
     && mkdir downloads \
     && wget -O downloads/terraform_${TERRAFORM_VER}_linux_amd64.zip ${TERRAFORM_URL} \
