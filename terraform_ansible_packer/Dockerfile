@@ -17,7 +17,11 @@ ENV AWSCLI_VERSION=${AWSCLI_VER}
 ENV TERRAFORM_VERSION=${TERRAFORM_VER}
 ENV PACKER_VERSION=${PACKER_VER}
 RUN apt-get update \
-    && apt-get install -y curl python3 python3-pip python3-boto unzip wget \
+    && apt-get install -y software-properties-common \
+    && apt-get update \
+    && add-apt-repository ppa:git-core/ppa -y \
+    && apt-get install -y curl git python3 python3-pip python3-boto unzip wget \
+    && apt-get dist-upgrade -y \
     && mkdir downloads \
     && wget -O downloads/terraform_${TERRAFORM_VER}_linux_amd64.zip ${TERRAFORM_URL} \
     && wget -O downloads/packer_${PACKER_VER}_linux_amd64.zip ${PACKER_URL} \
