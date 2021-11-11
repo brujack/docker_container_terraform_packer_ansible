@@ -55,4 +55,4 @@ RUN apt-get clean \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-CMD    ["/bin/bash"]
+CMD ["/bin/bash"]
