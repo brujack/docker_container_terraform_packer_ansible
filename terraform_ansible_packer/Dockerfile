@@ -48,11 +48,7 @@ RUN apt-get update \
     && tar -zxvf downloads/helm-v${HELM_VER}-linux-amd64.tar.gz -C downloads/helm \
     && mv downloads/helm/linux-amd64/helm /usr/local/bin/helm \
     && rm -rf downloads \
-    && python3 -m pip install --no-cache-dir ansible ansible-lint
-
-RUN apt-get clean \
+    && python3 -m pip install --no-cache-dir ansible ansible-lint \
     && apt-get autoremove -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-CMD ["/bin/bash"]
