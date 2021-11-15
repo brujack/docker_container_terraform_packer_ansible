@@ -7,9 +7,9 @@ ARG PACKER_URL="https://releases.hashicorp.com/packer/${PACKER_VER}/packer_${PAC
 ARG AWS_URL="https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip"
 ARG ANSIBLE_VER="4.7.0"
 ARG KUBERNETES_GPG_KEY_URL="https://packages.cloud.google.com/apt/doc/apt-key.gpg"
-ARG YQ_VER="4.12.2"
+ARG YQ_VER="4.14.2"
 ARG YQ_URL="https://github.com/mikefarah/yq/releases/download/v${YQ_VER}/yq_linux_amd64"
-ARG HELM_VER="3.7.0"
+ARG HELM_VER="3.7.1"
 ARG HELM_URL="https://get.helm.sh/helm-v${HELM_VER}-linux-amd64.tar.gz"
 
 LABEL maintainer="brujack"
