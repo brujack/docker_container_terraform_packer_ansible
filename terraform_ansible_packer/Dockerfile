@@ -51,4 +51,4 @@ RUN apt-get update \
     && python3 -m pip install --no-cache-dir ansible ansible-lint \
     && apt-get autoremove -y \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* downloads/*
