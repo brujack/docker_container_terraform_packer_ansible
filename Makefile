@@ -8,4 +8,4 @@ lint:
 	hadolint Dockerfile
 
 build: lint
-	@DOCKER_BUILDKIT=1 docker build -t brujack/terraform_ansible:latest .
+	@DOCKER_BUILDKIT=1 docker build -t brujack/terraform_ansible_packer:latest .
