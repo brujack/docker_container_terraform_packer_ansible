@@ -29,8 +29,8 @@ jobs:
         uses: docker/login-action@v1
         with:
           registry: ${{ env.REGISTRY }}
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: hadolint
         uses: hadolint/hadolint-action@v1.6.0
@@ -43,4 +43,4 @@ jobs:
         with:
           file: Dockerfile
           # push: true
-          tags: ${{ env.REGISTRY }}/brujack/terraform-packer-ansible:latest
+          tags: ${{ env.REGISTRY }}/brujack/terraform_ansible_packer:latest
