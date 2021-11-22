@@ -10,7 +10,7 @@ on:
       - '**'
       - 'main'
 env:
-  REGISTRY: ghcr.io
+  REGISTRY: docker.io
 
 jobs:
   build-terraform:
@@ -43,4 +43,4 @@ jobs:
         with:
           file: Dockerfile
           # push: true
-          tags: ${{ env.REGISTRY }}/multiviewfinancial/terraform:latest
+          tags: ${{ env.REGISTRY }}/brujack/terraform-packer-ansible:latest
