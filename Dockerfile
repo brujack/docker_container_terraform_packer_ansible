@@ -61,7 +61,6 @@ RUN apt-get update \
     && wget -q -O downloads/helm-v${HELM_VER}-linux-amd64.tar.gz ${HELM_URL} \
     && tar -zxvf downloads/helm-v${HELM_VER}-linux-amd64.tar.gz -C downloads/helm \
     && mv downloads/helm/linux-amd64/helm /usr/local/bin/helm \
-    && rm -rf downloads \
     && python3 -m pip install --no-cache-dir ansible ansible-lint \
     && wget -q -O downloads/ruby-install-${RUBY_INSTALL_VER}.tar.gz ${RUBY_INSTALL_URL} \
     && tar -xzvf downloads/ruby-install-${RUBY_INSTALL_VER}.tar.gz -C downloads/
@@ -74,4 +73,4 @@ RUN make install \
     && ln -s /opt/rubies/ruby-3.0.2/lib/ruby/gems/3.0.0/terraspace /usr/local/bin/terraspace \
     && apt-get autoremove -y \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* downloads/*
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* downloads
