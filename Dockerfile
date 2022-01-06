@@ -1,16 +1,20 @@
 FROM ubuntu:focal
 
-ARG TERRAFORM_VER="1.0.9"
+ARG TERRAFORM_VER="1.1.2"
 ARG TERRAFORM_URL="https://releases.hashicorp.com/terraform/${TERRAFORM_VER}/terraform_${TERRAFORM_VER}_linux_amd64.zip"
 ARG PACKER_VER="1.7.6"
 ARG PACKER_URL="https://releases.hashicorp.com/packer/${PACKER_VER}/packer_${PACKER_VER}_linux_amd64.zip"
 ARG AWS_URL="https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip"
-ARG ANSIBLE_VER="4.7.0"
+ARG ANSIBLE_VER="5.1.0"
 ARG KUBERNETES_GPG_KEY_URL="https://packages.cloud.google.com/apt/doc/apt-key.gpg"
 ARG YQ_VER="4.14.2"
 ARG YQ_URL="https://github.com/mikefarah/yq/releases/download/v${YQ_VER}/yq_linux_amd64"
 ARG HELM_VER="3.7.1"
 ARG HELM_URL="https://get.helm.sh/helm-v${HELM_VER}-linux-amd64.tar.gz"
+ARG RUBY_INSTALL_VER="0.8.3"
+ARG RUBY_INSTALL_URL="https://github.com/postmodern/ruby-install/archive/v${RUBY_INSTALL_VER}.tar.gz"
+ARG RUBY_VER="3.0.2"
+ARG TERRASPACE_VER="0.7.2"
 
 LABEL maintainer="brujack"
 LABEL terraform_version=$TERRAFORM_VER
@@ -49,6 +53,12 @@ RUN apt-get update \
     && mv downloads/helm/linux-amd64/helm /usr/local/bin/helm \
     && rm -rf downloads \
     && python3 -m pip install --no-cache-dir ansible ansible-lint \
+    && wget -q -O downloads/chruby-${CHRUBY_VER}.tar.gz ${CHRUBY_URL} \
+    && tar -xzvf downloads/chruby-${CHRUBY_VER}.tar.gz -C downloads/ \
+    && cd downloads/chruby-${CHRUBY_VER}/ \
+    && make install \
+    && ruby-install ruby ${RUBY_VER} \
+    && gem install terraspace \
     && apt-get autoremove -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* downloads/*
