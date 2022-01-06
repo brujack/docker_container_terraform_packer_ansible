@@ -63,12 +63,15 @@ RUN apt-get update \
     && mv downloads/helm/linux-amd64/helm /usr/local/bin/helm \
     && rm -rf downloads \
     && python3 -m pip install --no-cache-dir ansible ansible-lint \
-    && wget -q -O downloads/chruby-${CHRUBY_VER}.tar.gz ${CHRUBY_URL} \
-    && tar -xzvf downloads/chruby-${CHRUBY_VER}.tar.gz -C downloads/ \
-    && cd downloads/chruby-${CHRUBY_VER}/ \
-    && make install \
+    && wget -q -O downloads/ruby-install-${RUBY_INSTALL_VER}.tar.gz ${RUBY_INSTALL_URL} \
+    && tar -xzvf downloads/ruby-install-${RUBY_INSTALL_VER}.tar.gz -C downloads/
+WORKDIR /downloads/ruby-install-${RUBY_INSTALL_VER}/
+RUN make install \
     && ruby-install ruby ${RUBY_VER} \
-    && gem install terraspace \
+    && ln -s /opt/rubies/ruby-3.0.2/bin/ruby /usr/local/bin/ruby \
+    && ln -s /opt/rubies/ruby-3.0.2/bin/gem /usr/local/bin/gem \
+    && gem install terraspace:${TERRASPACE_VER} \
+    && ln -s /opt/rubies/ruby-3.0.2/lib/ruby/gems/3.0.0/terraspace /usr/local/bin/terraspace \
     && apt-get autoremove -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* downloads/*
