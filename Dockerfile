@@ -1,6 +1,6 @@
 FROM ubuntu:focal
 
-ARG TERRAFORM_VER="1.1.2"
+ARG TERRAFORM_VER="1.1.4"
 ARG TERRAFORM_URL="https://releases.hashicorp.com/terraform/${TERRAFORM_VER}/terraform_${TERRAFORM_VER}_linux_amd64.zip"
 ARG TFLINT_VER="v0.34.1"
 ARG TFLINT_URL="https://github.com/terraform-linters/tflint/releases/download/${TFLINT_VER}/tflint_linux_amd64.zip"
