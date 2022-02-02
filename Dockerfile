@@ -4,7 +4,7 @@ ARG TERRAFORM_VER="1.1.4"
 ARG TERRAFORM_URL="https://releases.hashicorp.com/terraform/${TERRAFORM_VER}/terraform_${TERRAFORM_VER}_linux_amd64.zip"
 ARG TFLINT_VER="v0.34.1"
 ARG TFLINT_URL="https://github.com/terraform-linters/tflint/releases/download/${TFLINT_VER}/tflint_linux_amd64.zip"
-ARG TFSEC_VER="v1.0.7"
+ARG TFSEC_VER="v1.0.8"
 ARG TFSEC_URL="https://github.com/aquasecurity/tfsec/releases/download/${TFSEC_VER}/tfsec-linux-amd64"
 ARG PACKER_VER="1.7.6"
 ARG PACKER_URL="https://releases.hashicorp.com/packer/${PACKER_VER}/packer_${PACKER_VER}_linux_amd64.zip"
@@ -49,10 +49,11 @@ RUN apt-get update \
     && wget -q -O downloads/awscliv2.zip ${AWS_URL} \
     && unzip 'downloads/awscliv2.zip' -d downloads \
     && downloads/aws/install --install-dir /usr/local/aws-cli --bin-dir /usr/local/bin \
-    && curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg ${KUBERNETES_GPG_KEY_URL} \
-    && echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | tee /etc/apt/sources.list.d/kubernetes.list \
-    && apt-get update \
-    && apt-get install -y --no-install-recommends kubectl \
+    # removed kubectl as this install fails on macos silicon
+    # && curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg ${KUBERNETES_GPG_KEY_URL} \
+    # && echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | tee /etc/apt/sources.list.d/kubernetes.list \
+    # && apt-get update \
+    # && apt-get install -y --no-install-recommends kubectl \
     && wget -q -O downloads/yq_${YQ_VER} ${YQ_URL} \
     && cp -a downloads/yq_${YQ_VER} /usr/local/bin \
     && mv /usr/local/bin/yq_${YQ_VER} /usr/local/bin/yq \
