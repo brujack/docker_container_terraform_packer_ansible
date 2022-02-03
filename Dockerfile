@@ -36,6 +36,7 @@ RUN apt-get update \
     && add-apt-repository ppa:git-core/ppa -y \
     && apt-get install -y --no-install-recommends apt-utils curl git jq make python3 python3-pip python3-boto tar unzip wget \
     && apt-get upgrade -y \
+    && sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b /usr/local/bin \
     && mkdir -p downloads/helm \
     && wget -q -O downloads/terraform_${TERRAFORM_VER}_linux_amd64.zip ${TERRAFORM_URL} \
     && wget -q -O downloads/packer_${PACKER_VER}_linux_amd64.zip ${PACKER_URL} \
@@ -68,10 +69,10 @@ RUN apt-get update \
 WORKDIR /downloads/ruby-install-${RUBY_INSTALL_VER}/
 RUN make install \
     && ruby-install ruby ${RUBY_VER} \
-    && ln -s /opt/rubies/ruby-3.0.2/bin/ruby /usr/local/bin/ruby \
-    && ln -s /opt/rubies/ruby-3.0.2/bin/gem /usr/local/bin/gem \
+    && ln -s /opt/rubies/ruby-${RUBY_VER}/bin/ruby /usr/local/bin/ruby \
+    && ln -s /opt/rubies/ruby-${RUBY_VER}/bin/gem /usr/local/bin/gem \
     && gem install terraspace:${TERRASPACE_VER} \
-    && ln -s /opt/rubies/ruby-3.0.2/lib/ruby/gems/3.0.0/terraspace /usr/local/bin/terraspace \
+    && ln -s /opt/rubies/ruby-${RUBY_VER}/lib/ruby/gems/3.0.0/terraspace /usr/local/bin/terraspace \
     && apt-get autoremove -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* downloads
