@@ -1,6 +1,6 @@
 FROM ubuntu:focal
 
-ARG TERRAFORM_VER="1.1.4"
+ARG TERRAFORM_VER="1.1.5"
 ARG TERRAFORM_URL="https://releases.hashicorp.com/terraform/${TERRAFORM_VER}/terraform_${TERRAFORM_VER}_linux_amd64.zip"
 ARG TFLINT_VER="v0.34.1"
 ARG TFLINT_URL="https://github.com/terraform-linters/tflint/releases/download/${TFLINT_VER}/tflint_linux_amd64.zip"
@@ -18,7 +18,7 @@ ARG HELM_URL="https://get.helm.sh/helm-v${HELM_VER}-linux-amd64.tar.gz"
 ARG RUBY_INSTALL_VER="0.8.3"
 ARG RUBY_INSTALL_URL="https://github.com/postmodern/ruby-install/archive/v${RUBY_INSTALL_VER}.tar.gz"
 ARG RUBY_VER="3.0.2"
-ARG TERRASPACE_VER="1.1.0"
+ARG TERRASPACE_VER="1.1.2"
 
 LABEL maintainer="brujack"
 LABEL terraform_version=$TERRAFORM_VER
