@@ -17,7 +17,7 @@ ARG HELM_VER="3.7.1"
 ARG HELM_URL="https://get.helm.sh/helm-v${HELM_VER}-linux-amd64.tar.gz"
 ARG RUBY_INSTALL_VER="0.8.3"
 ARG RUBY_INSTALL_URL="https://github.com/postmodern/ruby-install/archive/v${RUBY_INSTALL_VER}.tar.gz"
-ARG RUBY_VER="3.0.2"
+ARG RUBY_VER="3.1.1"
 ARG TERRASPACE_VER="1.1.1"
 
 LABEL maintainer="brujack"
