@@ -1,4 +1,4 @@
-FROM ubuntu:focal
+FROM ubuntu:20.04
 
 ARG TERRAFORM_VER="1.1.5"
 ARG TERRAFORM_URL="https://releases.hashicorp.com/terraform/${TERRAFORM_VER}/terraform_${TERRAFORM_VER}_linux_amd64.zip"
