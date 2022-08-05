@@ -44,3 +44,17 @@ jobs:
           file: Dockerfile
           push: true
           tags: ${{ env.REGISTRY }}/brujack/terraform_ansible_packer:latest
+
+      - name: run snyk
+        continue-on-error: true
+        uses: snyk/actions/docker@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          image: ${{ env.REGISTRY }}/brujack/terraform_ansible_packer:latest
+          args: --file=Dockerfile
+
+      - name: upload snyk result to github code scanning
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: snyk.sarif
