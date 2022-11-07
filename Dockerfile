@@ -15,10 +15,6 @@ ARG YQ_VER="4.29.2"
 ARG YQ_URL="https://github.com/mikefarah/yq/releases/download/v${YQ_VER}/yq_linux_amd64"
 ARG HELM_VER="3.10.1"
 ARG HELM_URL="https://get.helm.sh/helm-v${HELM_VER}-linux-amd64.tar.gz"
-ARG RUBY_INSTALL_VER="0.8.3"
-ARG RUBY_INSTALL_URL="https://github.com/postmodern/ruby-install/archive/v${RUBY_INSTALL_VER}.tar.gz"
-ARG RUBY_VER="3.1.2"
-ARG TERRASPACE_VER="2.2.2"
 
 LABEL maintainer="brujack"
 LABEL terraform_version=$TERRAFORM_VER
@@ -64,15 +60,6 @@ RUN apt-get update \
     && tar -zxvf downloads/helm-v${HELM_VER}-linux-amd64.tar.gz -C downloads/helm \
     && mv downloads/helm/linux-amd64/helm /usr/local/bin/helm \
     && python3 -m pip install --no-cache-dir ansible ansible-lint \
-    && wget -q -O downloads/ruby-install-${RUBY_INSTALL_VER}.tar.gz ${RUBY_INSTALL_URL} \
-    && tar -xzvf downloads/ruby-install-${RUBY_INSTALL_VER}.tar.gz -C downloads/
-WORKDIR /downloads/ruby-install-${RUBY_INSTALL_VER}/
-RUN make install \
-    && ruby-install ruby ${RUBY_VER} \
-    && ln -s /opt/rubies/ruby-${RUBY_VER}/bin/ruby /usr/local/bin/ruby \
-    && ln -s /opt/rubies/ruby-${RUBY_VER}/bin/gem /usr/local/bin/gem \
-    && gem install terraspace:${TERRASPACE_VER} \
-    && ln -s /opt/rubies/ruby-${RUBY_VER}/lib/ruby/gems/3.0.0/terraspace /usr/local/bin/terraspace \
     && apt-get autoremove -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* downloads
