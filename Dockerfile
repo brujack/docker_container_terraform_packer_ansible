@@ -1,24 +1,24 @@
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 
-ARG TERRAFORM_VER="1.1.7"
+ARG TERRAFORM_VER="1.3.3"
 ARG TERRAFORM_URL="https://releases.hashicorp.com/terraform/${TERRAFORM_VER}/terraform_${TERRAFORM_VER}_linux_amd64.zip"
-ARG TFLINT_VER="v0.39.1"
+ARG TFLINT_VER="v0.42.2"
 ARG TFLINT_URL="https://github.com/terraform-linters/tflint/releases/download/${TFLINT_VER}/tflint_linux_amd64.zip"
-ARG TFSEC_VER="v1.27.1"
+ARG TFSEC_VER="v1.28.1"
 ARG TFSEC_URL="https://github.com/aquasecurity/tfsec/releases/download/${TFSEC_VER}/tfsec-linux-amd64"
-ARG PACKER_VER="1.8.3"
+ARG PACKER_VER="1.8.4"
 ARG PACKER_URL="https://releases.hashicorp.com/packer/${PACKER_VER}/packer_${PACKER_VER}_linux_amd64.zip"
 ARG AWS_URL="https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip"
-ARG ANSIBLE_VER="6.2.0"
+ARG ANSIBLE_VER="6.5.0"
 ARG KUBERNETES_GPG_KEY_URL="https://packages.cloud.google.com/apt/doc/apt-key.gpg"
-ARG YQ_VER="4.27.2"
+ARG YQ_VER="4.29.2"
 ARG YQ_URL="https://github.com/mikefarah/yq/releases/download/v${YQ_VER}/yq_linux_amd64"
-ARG HELM_VER="3.9.2"
+ARG HELM_VER="3.10.1"
 ARG HELM_URL="https://get.helm.sh/helm-v${HELM_VER}-linux-amd64.tar.gz"
 ARG RUBY_INSTALL_VER="0.8.3"
 ARG RUBY_INSTALL_URL="https://github.com/postmodern/ruby-install/archive/v${RUBY_INSTALL_VER}.tar.gz"
 ARG RUBY_VER="3.1.2"
-ARG TERRASPACE_VER="2.1.5"
+ARG TERRASPACE_VER="2.2.2"
 
 LABEL maintainer="brujack"
 LABEL terraform_version=$TERRAFORM_VER
@@ -31,7 +31,7 @@ ENV TERRAFORM_VERSION=${TERRAFORM_VER}
 ENV PACKER_VERSION=${PACKER_VER}
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends apt-utils shellcheck software-properties-common \
+    && apt-get install -y --no-install-recommends apt-utils gpg-agent shellcheck software-properties-common \
     && apt-get update \
     && add-apt-repository ppa:git-core/ppa -y \
     && apt-get install -y --no-install-recommends apt-utils curl git jq make python3 python3-pip python3-boto tar unzip wget \
